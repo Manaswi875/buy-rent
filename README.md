@@ -2,9 +2,6 @@
 
 A full-stack web application to compare the long-term financial cost of renting versus buying a home. This tool helps users make informed financial decisions by simulating costs, equity buildup, and net value over time.
 
-![Rent vs Buy Simulator](./frontend/public/vite.svg) 
-*(Note: Replace with actual screenshot in production)*
-
 ## Features
 
 - **Financial Modeling**: Detailed calculation of rent (with inflation) vs buy (mortgage, tax, maintenance, appreciation, closing costs).
@@ -30,19 +27,6 @@ A full-stack web application to compare the long-term financial cost of renting 
     - Property tax and maintenance are calculated as a percentage of the home value (which appreciates annually).
     - **Net Cost** for buying is calculated as: `Cumulative Out-of-Pocket Expenses - (Home Value - Remaining Mortgage - Selling Closing Costs)`.
     - Expenses include: Mortgage Interest, Principal (equity), Property Tax, Maintenance, Buying/Selling Closing Costs.
-
-## Project Structure
-
-```
-rent-vs-buy/
-├── backend/        # FastAPI application
-│   ├── main.py     # API Entry point
-│   ├── simulator.py# Financial logic
-│   └── schemas.py  # Pydantic models
-├── frontend/       # React application
-│   ├── src/        # Source code
-│   └── ...
-└── README.md
 ```
 
 ## How to Run Locally
