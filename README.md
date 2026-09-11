@@ -3,7 +3,6 @@
 A full-stack web app for deciding whether to rent or buy — not with a single deterministic guess, but by analyzing one scenario through four different lenses: a classic side-by-side comparison, a Monte Carlo risk simulation, a break-even sensitivity heatmap, and a cash-flow stress test.
 
 **Live app**: https://buy-rent-ode9.vercel.app
-**API**: https://buy-rent.onrender.com (docs at `/docs`)
 
 ## How it works
 
