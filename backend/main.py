@@ -2,8 +2,16 @@ import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from schemas import SimulationInput, SimulationOutput
+from schemas import (
+    SimulationInput, SimulationOutput,
+    MonteCarloRequest, MonteCarloResponse,
+    SensitivityRequest, SensitivityResponse,
+    StressTestRequest, StressTestResponse,
+)
 from simulator import run_simulation
+from monte_carlo import run_monte_carlo
+from sensitivity import run_sensitivity
+from stress_test import run_stress_test
 
 app = FastAPI(title="Rent vs Buy Simulator API")
 
@@ -27,6 +35,18 @@ def read_root():
 def simulate(data: SimulationInput):
     result = run_simulation(data)
     return result
+
+@app.post("/simulate/monte-carlo", response_model=MonteCarloResponse)
+def simulate_monte_carlo(data: MonteCarloRequest):
+    return run_monte_carlo(data)
+
+@app.post("/simulate/sensitivity", response_model=SensitivityResponse)
+def simulate_sensitivity(data: SensitivityRequest):
+    return run_sensitivity(data)
+
+@app.post("/simulate/stress-test", response_model=StressTestResponse)
+def simulate_stress_test(data: StressTestRequest):
+    return run_stress_test(data)
 
 if __name__ == "__main__":
     import uvicorn

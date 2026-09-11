@@ -13,7 +13,11 @@ def calculate_monthly_mortgage(principal: float, annual_rate_percent: float, yea
     
     return principal * (monthly_rate * (1 + monthly_rate)**num_payments) / ((1 + monthly_rate)**num_payments - 1)
 
-def run_simulation(data: SimulationInput) -> SimulationOutput:
+def run_simulation(
+    data: SimulationInput,
+    appreciation_rates_by_year: List[float] | None = None,
+    rent_increase_rates_by_year: List[float] | None = None,
+) -> SimulationOutput:
     # Initial setup
     rent_monthly = data.monthly_rent
     
@@ -32,12 +36,22 @@ def run_simulation(data: SimulationInput) -> SimulationOutput:
     break_even_year = None
     
     for year in range(1, data.years_to_simulate + 1):
+        idx = year - 1
+        appreciation_percent = (
+            appreciation_rates_by_year[idx] if appreciation_rates_by_year is not None
+            else data.home_appreciation_rate_percent
+        )
+        rent_growth_percent = (
+            rent_increase_rates_by_year[idx] if rent_increase_rates_by_year is not None
+            else data.annual_rent_increase_percent
+        )
+
         # --- RENT CALC ---
         annual_rent = rent_monthly * 12 + (data.rent_insurance_monthly * 12)
         cum_rent_cost += annual_rent
-        
+
         # Increase rent for next year
-        rent_monthly *= (1 + data.annual_rent_increase_percent / 100)
+        rent_monthly *= (1 + rent_growth_percent / 100)
         
         # --- BUY CALC ---
         # Mortgage payments
@@ -70,7 +84,7 @@ def run_simulation(data: SimulationInput) -> SimulationOutput:
         cum_buy_out_of_pocket += annual_buy_cost
         
         # Appreciation
-        home_value *= (1 + data.home_appreciation_rate_percent / 100)
+        home_value *= (1 + appreciation_percent / 100)
         
         # Equity
         equity = home_value - remaining_loan

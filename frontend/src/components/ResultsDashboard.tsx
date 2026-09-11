@@ -1,6 +1,7 @@
 import React from 'react';
 import type { SimulationOutput } from '../types';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { formatCurrency } from '../utils/format';
 
 interface Props {
     results: SimulationOutput | null;
@@ -18,10 +19,6 @@ export const ResultsDashboard: React.FC<Props> = ({ results }) => {
         Buy: Math.round(r.buy_net_cost), // Net cost (Expenses - Equity gain basically, but simplified as defined in backend)
         Equity: Math.round(r.buy_equity)
     }));
-
-    const formatCurrency = (val: number | undefined) => {
-        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val ?? 0);
-    };
 
     return (
         <div className="results-dashboard">
