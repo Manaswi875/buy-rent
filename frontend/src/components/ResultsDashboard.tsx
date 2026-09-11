@@ -19,8 +19,8 @@ export const ResultsDashboard: React.FC<Props> = ({ results }) => {
         Equity: Math.round(r.buy_equity)
     }));
 
-    const formatCurrency = (val: number) => {
-        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
+    const formatCurrency = (val: number | undefined) => {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val ?? 0);
     };
 
     return (
@@ -55,7 +55,7 @@ export const ResultsDashboard: React.FC<Props> = ({ results }) => {
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="year" label={{ value: 'Years', position: 'insideBottomRight', offset: -10 }} />
                             <YAxis tickFormatter={(value) => `$${value / 1000}k`} />
-                            <Tooltip formatter={(value: number) => formatCurrency(value)} />
+                            <Tooltip formatter={(value: number | undefined) => formatCurrency(value)} />
                             <Legend />
                             <Line type="monotone" dataKey="Rent" stroke="#ff7300" strokeWidth={2} />
                             <Line type="monotone" dataKey="Buy" stroke="#387908" strokeWidth={2} name="Buy (Net Cost)" />
