@@ -12,7 +12,14 @@ export function LandingPage() {
         <div className="app-container">
             <div className="landing-hero">
                 <h1>🏡 Home Buying Decision Toolkit</h1>
-                <p>Enter your scenario once. Stress-test it four ways.</p>
+                <p className="landing-tagline">Enter your scenario once. Stress-test it four ways.</p>
+                <p className="landing-description">
+                    Deciding whether to rent or buy usually comes down to a single spreadsheet guess about
+                    interest rates and home appreciation. This tool goes further: describe your situation once,
+                    then see the deterministic comparison, a probability-weighted risk simulation, a sensitivity
+                    heatmap across your assumptions, and a stress test for what happens if a rate hike, job loss,
+                    or surprise bill hits along the way.
+                </p>
                 <Link to="/scenario" className="landing-cta">Build Your Scenario →</Link>
             </div>
 
